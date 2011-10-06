@@ -236,20 +236,20 @@
                 }
             });
 
-            if (this.options.requireAutocomplete !== true) {
-                this._tagInput.blur(function(e) {
+            this._tagInput.blur(function(e) {
+                if (that.options.requireAutocomplete !== true) {
                     // Create a tag when the element loses focus (unless it's empty).
                     that.createTag(that._cleanedInput());
-                    if (that.tagList.children('.tagit-choice').size() == 0) {
-                        that._hintOverlay.show();
-                    }
-                }).focus(function(e) {
-                    that._hintOverlay.hide(
-                        that.options.hintHideEffect,
-                        that.options.hintHideEffectOptions,
-                        that.options.hintHideEffectSpeed);
-                });
-            }
+                }
+                if (that.tagList.children('.tagit-choice').size() == 0) {
+                    that._hintOverlay.show();
+                }
+            }).focus(function(e) {
+                that._hintOverlay.hide(
+                    that.options.hintHideEffect,
+                    that.options.hintHideEffectOptions,
+                    that.options.hintHideEffectSpeed);
+            });
 
             // Autocomplete.
             if (this.options.tagSource) {
